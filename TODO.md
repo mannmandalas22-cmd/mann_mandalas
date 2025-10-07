@@ -1,0 +1,5 @@
+- [x] Create photosRow1 array with 20 workshop photos (w1.jpg to w20.jpg)
+- [x] Create photosRow2 array with 15 workshop photos (wo1.jpg to wo15.jpg)
+- [x] Update row 1 JSX to use photosRow1 and correct src path
+- [x] Update row 2 JSX to use photosRow2 and correct src path
+- [x] Ensure scrolling speed remains slow
