@@ -113,18 +113,25 @@ export default function PaintingsPage() {
 
   // Prevent background scroll when modal is open (client-only)
   useEffect(() => {
-    if (typeof document === 'undefined') return
-    if (isModalOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      if (typeof document !== 'undefined') {
-        document.body.style.overflow = 'unset'
+    if (!isModalOpen) return
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "+") {
+        handleZoomIn()
+      } else if (e.key === "-") {
+        handleZoomOut()
+      } else if (e.key === "ArrowRight") {
+        navigatePainting("next")
+      } else if (e.key === "ArrowLeft") {
+        navigatePainting("prev")
+      } else if (e.key === "Escape") {
+        closeModal()
       }
     }
-  }, [isModalOpen])
+
+    window.addEventListener("keydown", handleKeyDown)
+    return () => window.removeEventListener("keydown", handleKeyDown)
+  }, [isModalOpen, currentPainting, zoom])
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50/30 to-white">
